@@ -1,0 +1,27 @@
+plugins {
+    id "java"
+    id "application"
+}
+
+group "com.github.loadingbg"
+version "1.0.0"
+
+application {
+    mainClassName = "polygon.Main"
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name "m2-dv8tion"
+        url "https://m2.dv8tion.net/releases"
+    }
+}
+
+dependencies {
+    implementation("net.dv8tion:JDA:4.3.0_334") {
+        exclude module: "opus-java"
+    }
+
+    implementation "ch.qos.logback:logback-classic:1.2.6"
+}
