@@ -2,21 +2,19 @@ package polygon.commands;
 
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.InteractionHook;
-import net.dv8tion.jda.api.interactions.commands.build.CommandData;
+import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 
 public abstract class BotCommand {
-    private final CommandData data;
+    protected final String name;
+    protected final String subcommandGroupName;
+    protected final String subcommandName;
+    protected final OptionMapping[] options;
 
-    protected BotCommand(final CommandData data) {
-        this.data = data;
-    }
-
-    public final CommandData data() {
-        return data;
-    }
-
-    public final boolean shouldHandle(final String commandName) {
-        return data.getName().equals(commandName);
+    protected BotCommand(final String name, final String subcommandGroupName, final String subcommandName, final OptionMapping[] options) {
+        this.name = name;
+        this.subcommandGroupName = subcommandGroupName;
+        this.subcommandName = subcommandName;
+        this.options = options;
     }
 
     public abstract void handle(final SlashCommandEvent event, final InteractionHook hook);

@@ -7,7 +7,7 @@ group "com.github.loadingbg"
 version "1.0.0"
 
 application {
-    mainClassName = "polygon.Main"
+    getMainClass().set "polygon.Main"
 }
 
 repositories {

@@ -2,9 +2,8 @@ package polygon;
 
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import polygon.commands.BotCommand;
 
-import java.util.Optional;
+import java.util.Arrays;
 
 public final class Listener extends ListenerAdapter {
     private final Bot bot;
@@ -15,13 +14,14 @@ public final class Listener extends ListenerAdapter {
 
     @Override
     public void onSlashCommand(final SlashCommandEvent event) {
-        event.deferReply().queue(hook -> {
-            final Optional<BotCommand> handler = bot.commandToHandle(event.getName());
-            if (handler.isPresent()) {
-                handler.get().handle(event, hook);
-            } else {
-                hook.sendMessage("HOW?").queue();
-            }
-        });
+        event.deferReply().queue(hook ->
+            Arrays.stream(bot.commandManagers())
+                  .flatMap(mgr -> mgr.getCommand(event).stream())
+                  .findFirst()
+                  .ifPresentOrElse(
+                          cmd -> cmd.handle(event, hook),
+                          () -> hook.sendMessage("HOW?").setEphemeral(true).queue()
+                  )
+        );
     }
 }
