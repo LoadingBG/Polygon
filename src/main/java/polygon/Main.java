@@ -2,6 +2,7 @@ package polygon;
 
 import polygon.utils.BotLogger;
 
+import javax.security.auth.login.LoginException;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -20,7 +21,9 @@ public final class Main {
                 }
             }));
         } catch (final IOException | NullPointerException e) {
-            BotLogger.error("Could not read token.", e);
+            BotLogger.terminate("Could not read token.", e);
+        } catch (final LoginException e) {
+            BotLogger.terminate("Could not login.", e);
         }
     }
 }

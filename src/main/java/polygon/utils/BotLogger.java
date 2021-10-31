@@ -17,6 +17,10 @@ public final class BotLogger {
         LOG.error(message, error);
     }
 
+    public static void errorFormat(final String message, final Object... args) {
+        LOG.error(message, args);
+    }
+
     public static void terminate(final String message) {
         LOG.error("{} Terminating...", message);
         System.exit(-1);
