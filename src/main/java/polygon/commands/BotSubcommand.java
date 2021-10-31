@@ -20,6 +20,5 @@ public abstract class BotSubcommand {
         return new SubcommandData(name, description).addOptions(options);
     }
 
-    // TODO: make command context
     public abstract void handle(final SlashCommandEvent event, final InteractionHook hook);
 }

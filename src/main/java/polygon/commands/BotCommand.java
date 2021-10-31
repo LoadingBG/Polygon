@@ -8,6 +8,5 @@ public interface BotCommand {
     CommandData assembleData();
     String name();
     String description();
-    // TODO: make command context
     void handle(final SlashCommandEvent event, final InteractionHook hook);
 }

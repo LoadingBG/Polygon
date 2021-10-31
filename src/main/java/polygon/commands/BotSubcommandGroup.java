@@ -13,7 +13,6 @@ public record BotSubcommandGroup(String name, String description, List<BotSubcom
         return null;
     }
 
-    // TODO: make command context
     public void handle(final SlashCommandEvent event, final InteractionHook hook) {
         subcommands.stream()
                 .filter(cmd -> cmd.name.equals(event.getSubcommandName()))
