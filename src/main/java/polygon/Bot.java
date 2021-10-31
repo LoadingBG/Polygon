@@ -1,9 +1,9 @@
 package polygon;
 
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.requests.restaction.CommandCreateAction;
-import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
-import net.dv8tion.jda.api.sharding.ShardManager;
 import polygon.commands.BotCommand;
 import polygon.utils.BotLogger;
 
@@ -14,25 +14,23 @@ import java.util.Optional;
 public final class Bot {
     private static final String GUILD_ID = "695199180263653376";
 
-    private final ShardManager shards;
+    private final JDA jda;
     private final BotCommand[] commands = {};
 
     Bot(final String token) throws LoginException {
-        shards = DefaultShardManagerBuilder
+        jda = JDABuilder
                 .createDefault(token)
                 .addEventListeners(new Listener(this))
                 .build();
-        shards.getShards().forEach(shard -> {
-            try {
-                shard.awaitReady();
-            } catch (final InterruptedException e) {
-                BotLogger.error("Shard was interrupted while getting ready.", e);
-                Thread.currentThread().interrupt();
-            }
-        });
-        BotLogger.info("Shards are ready!");
+        try {
+            jda.awaitReady();
+        } catch (final InterruptedException e) {
+            BotLogger.error("Connection was interrupted while getting ready.", e);
+            Thread.currentThread().interrupt();
+        }
+        BotLogger.info("Bot is online!");
 
-        Optional.ofNullable(shards.getGuildById(GUILD_ID))
+        Optional.ofNullable(jda.getGuildById(GUILD_ID))
                 .ifPresentOrElse(this::loadCommands, () -> BotLogger.terminate("Guild cannot be found."));
     }
 
@@ -51,6 +49,6 @@ public final class Bot {
 
     public void shutdown() {
         BotLogger.info("Shutting down bot...");
-        shards.shutdown();
+        jda.shutdown();
     }
 }
