@@ -1,10 +1,11 @@
-package polygon.commands;
+package polygon.commands.singles;
 
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.InteractionHook;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.commands.privileges.CommandPrivilege;
 import polygon.Bot;
+import polygon.commands.ExecutableBotCommand;
 
 public final class ShutdownCommand extends ExecutableBotCommand {
     private final Bot bot;

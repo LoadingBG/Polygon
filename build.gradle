@@ -24,5 +24,7 @@ dependencies {
         exclude module: "opus-java"
     }
 
+    implementation "org.json:json:20210307"
+
     implementation "ch.qos.logback:logback-classic:1.2.6"
 }

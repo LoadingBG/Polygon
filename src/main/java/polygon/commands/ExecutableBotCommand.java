@@ -18,7 +18,7 @@ public abstract class ExecutableBotCommand extends BotCommand {
     @Override
     public final CommandData assembleData() {
         final CommandData data = new CommandData(name, description).addOptions(options);
-        if (privileges != null) {
+        if (privileges.length > 0) {
             data.setDefaultEnabled(false);
         }
         return data;

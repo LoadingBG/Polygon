@@ -4,11 +4,17 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import polygon.commands.BotCommand;
-import polygon.commands.ShutdownCommand;
+import polygon.commands.run.RunCommand;
+import polygon.commands.singles.PingCommand;
+import polygon.commands.singles.ShutdownCommand;
 import polygon.utils.BotLogger;
 
 import javax.security.auth.login.LoginException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 public final class Bot {
     private static final List<Long> IDS = new ArrayList<>();
@@ -21,7 +27,10 @@ public final class Bot {
 
     Bot(final String token) throws LoginException {
         commands = new BotCommand[] {
-                new ShutdownCommand(this)
+                new PingCommand(),
+                new ShutdownCommand(this),
+
+                new RunCommand()
         };
 
         jda = JDABuilder

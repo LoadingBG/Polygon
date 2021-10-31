@@ -31,7 +31,7 @@ public class GroupingBotCommand extends BotCommand {
         Arrays.stream(subcommands)
               .map(BotSubcommand::assembleData)
               .forEach(data::addSubcommands);
-        if (privileges != null) {
+        if (privileges.length > 0) {
             data.setDefaultEnabled(false);
         }
         return data;
