@@ -3,25 +3,13 @@ package polygon;
 import polygon.utils.BotLogger;
 
 import javax.security.auth.login.LoginException;
-import java.io.IOException;
 import java.util.Objects;
+import java.util.Scanner;
 
 public final class Main {
     public static void main(final String[] args) {
-        try {
-            final String token = new String(Objects.requireNonNull(Main.class.getResourceAsStream("/token.txt")).readAllBytes());
-            final Bot bot = new Bot(token);
-            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                try {
-                    bot.shutdown();
-                    Thread.sleep(1000);
-                } catch (final InterruptedException e) {
-                    BotLogger.error("Interrupted while shutting down.", e);
-                    Thread.currentThread().interrupt();
-                }
-            }));
-        } catch (final IOException | NullPointerException e) {
-            BotLogger.terminate("Could not read token.", e);
+        try (final Scanner tokenReader = new Scanner(Objects.requireNonNull(Main.class.getResourceAsStream("/token.txt")))) {
+            new Bot(tokenReader.nextLine());
         } catch (final LoginException e) {
             BotLogger.terminate("Could not login.", e);
         }

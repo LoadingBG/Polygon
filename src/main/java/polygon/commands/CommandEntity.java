@@ -7,7 +7,7 @@ public abstract class CommandEntity {
     protected final String name;
     protected final String description;
 
-    public CommandEntity(final String name, final String description) {
+    protected CommandEntity(final String name, final String description) {
         this.name = name;
         this.description = description;
     }

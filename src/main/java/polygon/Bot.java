@@ -3,21 +3,25 @@ package polygon;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.requests.restaction.CommandCreateAction;
 import polygon.commands.BotCommand;
 import polygon.utils.BotLogger;
 
 import javax.security.auth.login.LoginException;
 import java.util.Arrays;
-import java.util.Optional;
+import java.util.Objects;
 
 public final class Bot {
-    private static final String GUILD_ID = "695199180263653376";
-
+    public static final long[] OWNER_IDS = {
+            616969228972458008L
+    };
     private final JDA jda;
-    private final BotCommand[] commands = {};
+    private final BotCommand[] commands;
 
     Bot(final String token) throws LoginException {
+        commands = new BotCommand[] {
+
+        };
+
         jda = JDABuilder
                 .createDefault(token)
                 .addEventListeners(new Listener(this))
@@ -30,17 +34,14 @@ public final class Bot {
         }
         BotLogger.info("Bot is online!");
 
-        Optional.ofNullable(jda.getGuildById(GUILD_ID))
-                .ifPresentOrElse(this::loadCommands, () -> BotLogger.terminate("Guild cannot be found."));
-    }
-
-    private void loadCommands(final Guild guild) {
-        guild.updateCommands().queue();
-        Arrays.stream(commands)
-              .map(BotCommand::assembleData)
-              .map(guild::upsertCommand)
-              .forEach(CommandCreateAction::complete);
-        BotLogger.info("Commands are loaded.");
+        try {
+            final Guild guild = Objects.requireNonNull(jda.getGuildById("695199180263653376"));
+            guild.updateCommands().complete();
+            Arrays.stream(commands).forEach(cmd -> cmd.register(guild));
+            BotLogger.info("Commands are loaded.");
+        } catch (final NullPointerException e) {
+            BotLogger.error("Guild cannot be found.", e);
+        }
     }
 
     public BotCommand[] commands() {
@@ -50,5 +51,6 @@ public final class Bot {
     public void shutdown() {
         BotLogger.info("Shutting down bot...");
         jda.shutdown();
+        System.exit(0);
     }
 }
