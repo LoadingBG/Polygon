@@ -1,24 +1,18 @@
 package polygon.commands;
 
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
-import net.dv8tion.jda.api.interactions.InteractionHook;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.commands.build.SubcommandData;
 
-public abstract class BotSubcommand {
-    protected final String name;
-    protected final String description;
+public abstract class BotSubcommand extends CommandEntity implements DataAssembler<SubcommandData> {
     protected final OptionData[] options;
 
     protected BotSubcommand(final String name, final String description, final OptionData[] options) {
-        this.name = name;
-        this.description = description;
+        super(name, description);
         this.options = options;
     }
 
+    @Override
     public final SubcommandData assembleData() {
         return new SubcommandData(name, description).addOptions(options);
     }
-
-    public abstract void handle(final SlashCommandEvent event, final InteractionHook hook);
 }

@@ -18,10 +18,7 @@ public final class Listener extends ListenerAdapter {
             Arrays.stream(bot.commands())
                   .filter(cmd -> cmd.name().equals(event.getName()))
                   .findFirst()
-                  .ifPresentOrElse(
-                          cmd -> cmd.handle(event, hook),
-                          () -> hook.sendMessage("HOW?").setEphemeral(true).queue()
-                  )
+                  .ifPresent(cmd -> cmd.handle(event, hook))
         );
     }
 }

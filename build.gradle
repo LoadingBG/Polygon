@@ -6,6 +6,7 @@ plugins {
 group "com.github.loadingbg"
 version "1.0.0"
 
+sourceCompatibility = 8
 application {
     getMainClass().set "polygon.Main"
 }
