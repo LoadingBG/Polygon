@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.commands.privileges.CommandPrivilege;
 import polygon.Bot;
 import polygon.commands.ExecutableBotCommand;
+import polygon.utils.EmbedUtils;
 
 public final class ShutdownCommand extends ExecutableBotCommand {
     private final Bot bot;
@@ -24,7 +25,10 @@ public final class ShutdownCommand extends ExecutableBotCommand {
 
     @Override
     public void handle(SlashCommandEvent event, InteractionHook hook) {
-        hook.sendMessage("Bot is shutting down...").queue();
+        hook.sendMessageEmbeds(EmbedUtils.generic(
+                "Bot is shutting down...",
+                "Bot will shut down in about 1 second."
+        )).queue();
         bot.shutdown();
     }
 }

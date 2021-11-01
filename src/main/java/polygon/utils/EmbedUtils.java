@@ -19,7 +19,15 @@ public final class EmbedUtils {
                 .build();
     }
 
-    public static MessageEmbed genericWithFields(String title, String description, MessageEmbed.Field... fields) {
+    public static MessageEmbed generic(final String title, final String description) {
+        return new EmbedBuilder()
+                .setTitle(title)
+                .setColor(Color.CYAN)
+                .setDescription(description)
+                .build();
+    }
+
+    public static MessageEmbed genericWithFields(String title, MessageEmbed.Field... fields) {
         final EmbedBuilder builder = new EmbedBuilder()
                 .setTitle(title)
                 .setColor(GENERIC_COLOR);

@@ -7,6 +7,7 @@ import polygon.commands.BotCommand;
 import polygon.commands.run.RunCommand;
 import polygon.commands.singles.PingCommand;
 import polygon.commands.singles.ShutdownCommand;
+import polygon.commands.singles.TestCommand;
 import polygon.utils.BotLogger;
 
 import javax.security.auth.login.LoginException;
@@ -17,22 +18,16 @@ import java.util.List;
 import java.util.Objects;
 
 public final class Bot {
-    private static final List<Long> IDS = new ArrayList<>();
+    public static final List<Long> OWNER_IDS;
     static {
-        IDS.add(616969228972458008L);
+        final List<Long> ids = new ArrayList<>();
+        ids.add(616969228972458008L);
+        OWNER_IDS = Collections.unmodifiableList(ids);
     }
-    public static final List<Long> OWNER_IDS = Collections.unmodifiableList(IDS);
     private final JDA jda;
     private final BotCommand[] commands;
 
     Bot(final String token) throws LoginException {
-        commands = new BotCommand[] {
-                new PingCommand(),
-                new ShutdownCommand(this),
-
-                new RunCommand()
-        };
-
         jda = JDABuilder
                 .createDefault(token)
                 .addEventListeners(new Listener(this))
@@ -45,8 +40,15 @@ public final class Bot {
         }
         BotLogger.info("Bot is online!");
 
+        commands = new BotCommand[] {
+                new PingCommand(),
+                new ShutdownCommand(this),
+                new TestCommand(jda),
+
+                new RunCommand()
+        };
         try {
-            final Guild guild = Objects.requireNonNull(jda.getGuildById("900269526426451988"));
+            final Guild guild = Objects.requireNonNull(jda.getGuildById("904753787888087080"));
             guild.updateCommands().complete();
             Arrays.stream(commands).forEach(cmd -> cmd.register(guild));
             BotLogger.info("Commands are loaded.");
