@@ -10,9 +10,10 @@ public final class RunCommand extends GroupingBotCommand {
         super(
                 "run",
                 "Runs a snippet of code",
-                new BotSubcommandGroup[0], // TODO: fix
+                new BotSubcommandGroup[0],
                 new BotSubcommand[] {
-                        new Languages()
+                        new Languages(),
+                        new Code()
                 },
                 new CommandPrivilege[0]
         );
