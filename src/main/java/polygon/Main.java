@@ -16,7 +16,7 @@ public final class Main {
         try (final Scanner tokenReader = new Scanner(Objects.requireNonNull(Main.class.getResourceAsStream("/token.txt")))) {
             new Bot(tokenReader.nextLine());
         } catch (final LoginException e) {
-            BotLogger.terminate("Could not login.", e);
+            BotLogger.error("Could not login.", e);
         }
     }
 }

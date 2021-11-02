@@ -101,7 +101,7 @@ public final class Bot {
         try {
             Thread.sleep(1000);
         } catch (final InterruptedException e) {
-            BotLogger.terminate("Bot was interrupted while shutting down.", e);
+            BotLogger.error("Bot was interrupted while shutting down.", e);
             Thread.currentThread().interrupt();
         }
         // Add any "shutdown handlers" below
