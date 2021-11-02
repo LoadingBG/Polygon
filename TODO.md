@@ -30,7 +30,7 @@ Sends help for commands.
 
 ### Settings
 ```
-/settings (level 1) (level 2) (level 3) ...
+/settings (menu) (submenu) (subsubmenu) ...
 ```
 A GUI command with dynamic select menu and buttons for configuring the bot.
 - Kinda like a settings menu in a program.
@@ -67,3 +67,4 @@ Make a system for help channels per language
 Set up a database.
 - NoSQL (MongoDB) or SQL (SQLite, MySQL, ...)
 - Maybe store in a non-db file?
+- Make database utils
