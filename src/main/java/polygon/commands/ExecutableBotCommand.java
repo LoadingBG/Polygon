@@ -4,6 +4,9 @@ import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.commands.privileges.CommandPrivilege;
 
+/**
+ * Represents an executable command (with no subcommands).
+ */
 public abstract class ExecutableBotCommand extends BotCommand {
     protected final OptionData[] options;
 

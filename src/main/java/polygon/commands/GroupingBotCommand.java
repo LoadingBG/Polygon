@@ -8,6 +8,9 @@ import net.dv8tion.jda.api.interactions.commands.privileges.CommandPrivilege;
 import java.util.Arrays;
 import java.util.Optional;
 
+/**
+ * Represents a command with subcommands and subcommand groups.
+ */
 public class GroupingBotCommand extends BotCommand {
     private final BotSubcommandGroup[] groups;
     private final BotSubcommand[] subcommands;

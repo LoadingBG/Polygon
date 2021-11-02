@@ -6,6 +6,9 @@ import net.dv8tion.jda.api.interactions.commands.build.SubcommandGroupData;
 
 import java.util.Arrays;
 
+/**
+ * Represents a subcommand group.
+ */
 public final class BotSubcommandGroup extends CommandEntity implements DataAssembler<SubcommandGroupData> {
     private final BotSubcommand[] subcommands;
 

@@ -5,6 +5,11 @@ import net.dv8tion.jda.api.interactions.commands.Command;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.privileges.CommandPrivilege;
 
+/**
+ * Represents a top-level command like {@code /ping}.
+ * @see ExecutableBotCommand
+ * @see GroupingBotCommand
+ */
 public abstract class BotCommand extends CommandEntity implements DataAssembler<CommandData> {
     protected final CommandPrivilege[] privileges;
 
