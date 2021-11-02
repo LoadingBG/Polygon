@@ -5,6 +5,10 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.Arrays;
 
+/**
+ * The event listener. Dispatches the command received
+ * based on the bot commands in {@link Bot#commands()}.
+ */
 public final class Listener extends ListenerAdapter {
     private final Bot bot;
 
