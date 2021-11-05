@@ -62,9 +62,3 @@ Make a system for help channels per language
 
 ---
 ## Tools
-
-### Database
-Set up a database.
-- NoSQL (MongoDB) or SQL (SQLite, MySQL, ...)
-- Maybe store in a non-db file?
-- Make database utils
