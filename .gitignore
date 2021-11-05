@@ -3,3 +3,4 @@
 build/
 gradle/
 src/main/resources/token.txt
+database.db

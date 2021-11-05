@@ -31,4 +31,14 @@ public final class BotLogger {
     public static void error(final String message, final Throwable error) {
         LOG.error(message, error);
     }
+
+    /**
+     * Logs a message as error.
+     *
+     * @param message The message to be logged.
+     * @param args Any arguments for formatting.
+     */
+    public static void error(final String message, final Object... args) {
+        LOG.error(message, args);
+    }
 }
